@@ -38,11 +38,15 @@ Usage
 
 CLI Execution:
 
-    cscript wget.vbs <url> [save_to_file]
+    cscript wget.vbs <url> [save_to_file] [/NC]
 
 GUI Execution:
 
-    wscript wget.vbs <url> [save_to_file]
+    wscript wget.vbs <url> [save_to_file] [/NC]
+
+`/NC`
+: No clobber: skip downloads that would download to existing files
+  (overwriting them)
 
 
 License
