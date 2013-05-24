@@ -25,18 +25,20 @@ If WScript.Arguments.Count < 1 Then
     "existing files (overwriting them)." & vbCrLf _
   )
   WScript.Quit
-Else
+Else '' WScript.Arguments.Count >= 1
   Dim arg0, arg1, arg2
+  arg0 = WScript.Arguments(0)
+  arg1 = ""
+  arg2 = ""
   If WScript.Arguments.Count = 1 Then
-    arg0 = WScript.Arguments(0)
     Call HttpGet(arg0, "", False)
-  Else
+  Else '' WScript.Arguments.Count >= 2
     arg1 = WScript.Arguments(1)
     Dim boolOverwrite
     boolOverwrite = False
     If WScript.Arguments.Count = 3 Then
       arg2 = WScript.Arguments(2)
-      boolOverwrite = (InStrRev(arg2, "/NC") != (Len(arg2) - 1))
+      boolOverwrite = ((InStrRev(arg2, "/NC") = 1) And (Len(arg2) = 3))
     End If
     Call HttpGet(arg0, arg1, boolOverwrite)
   End If
