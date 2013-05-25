@@ -10,8 +10,8 @@
 ''   Visual Basic Scripting engines (cscript.exe or wscript.exe).
 ''
 '' USAGE:
-''   cscript wget.vbs <url> [saveTo] [/NC]
-''   wscript wget.vbs <url> [saveTo] [/NC]
+''   cscript wget.vbs <url> [save_to_file] [[/Y]|[/NC]]
+''   wscript wget.vbs <url> [save_to_file] [[/Y]|[/NC]]
 ''
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
@@ -19,8 +19,10 @@
 If WScript.Arguments.Count < 1 Then
   WScript.Echo(_
     "VBS Wget 1.00, a non-interactive HTTP retriever." & vbCrLf & _
-    "Usage: [c|w]script " & WScript.ScriptName & " <url> [saveTo] [/Y]" & _
-    vbCrLf & vbCrLf & _
+    "Usage: [c|w]script " & WScript.ScriptName & " <url> [save_to_file] " & _
+    "[[/Y]|[/NC]]" & vbCrLf & vbCrLf & _
+    "    /Y     Suppresses prompting to confirm you want to overwrite an " & _
+    "existing destination file." & vbCrLf & _
     "    /NC    No clobber: skip downloads that would download to " & _
     "existing files (overwriting them)." & vbCrLf _
   )
@@ -35,10 +37,14 @@ Else '' WScript.Arguments.Count >= 1
   Else '' WScript.Arguments.Count >= 2
     arg1 = WScript.Arguments(1)
     Dim boolOverwrite
-    boolOverwrite = False
+    boolOverwrite = -1 '' Don't know; prompt user
     If WScript.Arguments.Count = 3 Then
       arg2 = WScript.Arguments(2)
-      boolOverwrite = ((InStrRev(arg2, "/NC") = 1) And (Len(arg2) = 3))
+      If ((InStrRev(arg2, "/Y") = 1) And (Len(arg2) = 2)) Then
+        boolOverwrite = 1 '' Yes; overwrite
+      ElseIf ((InStrRev(arg2, "/NC") = 1) And (Len(arg2) = 3)) Then
+        boolOverwrite = 0 '' No; don't clobber
+      End If
     End If
     Call HttpGet(arg0, arg1, boolOverwrite)
   End If
@@ -80,10 +86,10 @@ Sub HttpGet(strUrl, strSaveToFileName, boolOverwrite)
   
   '' Determine if file already exists, if so, determine if user overwrites
   If FileObject.FileExists(NewFile) Then
-    If boolOverwrite = False Then
+    If boolOverwrite = -1 Then
       boolOverwrite = YesNoPrompt("WARNING", "File exists! Overwrite?")
     End If
-    If boolOverwrite = True Then
+    If boolOverwrite = 1 Then
       FileObject.DeleteFile(NewFile)
     Else
       Exit Sub
