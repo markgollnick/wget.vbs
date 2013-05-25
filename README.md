@@ -44,11 +44,10 @@ GUI Execution:
 
     wscript wget.vbs <url> [save_to_file] [[/Y]|[/NC]]
 
-`/Y`
-: Suppresses prompting to confirm you want to overwrite an existing destination
-  file.
-`/NC`
-: No clobber: skip downloads that would download to existing files
+* `/Y`: Suppresses prompting to confirm you want to overwrite an existing
+  destination file.
+
+* `/NC`: No clobber: skip downloads that would download to existing files
   (overwriting them).
 
 
