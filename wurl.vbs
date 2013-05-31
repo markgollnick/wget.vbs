@@ -1,24 +1,24 @@
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-'' wget.vbs
-'' v1.0, 2012-03-30, 16:33:49 CST
+'' wurl.vbs
+'' v1.01, 2013-05-30, 13:55:47 CDT
 '' 
 '' AUTHOR: Mark R. Gollnick <mark.r.gollnick@gmail.com>
 '' HOMEPAGE: http://home.engineering.iastate.edu/~mrgoll12/
 ''
 '' DESCRIPTION:
-''   An HTTP file downloader similar to WGET for Windows
-''   Visual Basic Scripting engines (cscript.exe or wscript.exe).
+''   An HTTP file downloader for Visual Basic Scripting engines on Windows
+''   (cscript.exe or wscript.exe).
 ''
 '' USAGE:
-''   cscript wget.vbs <url> [save_to_file] [[/Y]|[/NC]]
-''   wscript wget.vbs <url> [save_to_file] [[/Y]|[/NC]]
+''   cscript wurl.vbs <url> [save_to_file] [[/Y]|[/NC]]
+''   wscript wurl.vbs <url> [save_to_file] [[/Y]|[/NC]]
 ''
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
 '' MAIN
 If WScript.Arguments.Count < 1 Then
   WScript.Echo(_
-    "VBS Wget 1.00, a non-interactive HTTP retriever." & vbCrLf & _
+    "Wurl 1.01, a non-interactive HTTP retriever." & vbCrLf & _
     "Usage: [c|w]script " & WScript.ScriptName & " <url> [save_to_file] " & _
     "[[/Y]|[/NC]]" & vbCrLf & vbCrLf & _
     "    /Y     Suppresses prompting to confirm you want to overwrite an " & _

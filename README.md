@@ -1,24 +1,25 @@
-wget.vbs
+wurl.vbs
 ========
 
-An HTTP file downloader (inspired by GNU [wget][]) written in VBScript.
+An HTTP file downloader (inspired by [curl][] and GNU [wget][]) written in
+VBScript, and callable from Windows batch scripts. The name "wurl" is a mixture
+of "wget" and "curl". Or, it could stand for "Windows URL". You decide...
 
 [wget]: http://gnuwin32.sourceforge.net/packages/wget.htm
+[curl]: http://curl.haxx.se/
 
 
 Rationale
 ---------
 
-Ever needed to do some automated post-install and set-up on a brand-spankin'
-new installation of Windows? Or, ever wished you could download stuff onto said
-brand-new Windows box from the comfort and convenience of a batch script?
-Yeah...
+Ever needed to do some automated downloading and post-installation steps
+following the set-up of a fresh installation of Windows? Or, ever wished you
+could download stuff from the comfort and convenience of a batch script
+without having to first fetch/package additional executables and their
+libraries? Yeah...
 
-Hence wget.vbs, which is runnable on out-of-the-box set-ups. (It's in VBScript
-instead of PowerShell because it was written in a day and an age when I was
-still using Windows XP, but it will also work for Vista+)
-
-You could even use VBS wget to get GNU [wget][]...
+Hence wurl.vbs, which is runnable on out-of-the-box set-ups of Windows and
+callable from simple batch scripts, thus supporting automated silent downloads.
 
 Use it wisely!
 
@@ -30,7 +31,7 @@ Requirements
 * wscript.exe (GUI; default for double-click of VBS file)
 
 ...Both of which come with Windows, so nothing is really required (aside from
-Windows itself) for wget.vbs to run. :-)
+Windows itself) for wurl.vbs to run. :-)
 
 
 Usage
@@ -38,11 +39,11 @@ Usage
 
 CLI Execution:
 
-    cscript wget.vbs <url> [save_to_file] [[/Y]|[/NC]]
+    cscript wurl.vbs <url> [save_to_file] [[/Y]|[/NC]]
 
 GUI Execution:
 
-    wscript wget.vbs <url> [save_to_file] [[/Y]|[/NC]]
+    wscript wurl.vbs <url> [save_to_file] [[/Y]|[/NC]]
 
 * `/Y`: Suppresses prompting to confirm you want to overwrite an existing
   destination file.
